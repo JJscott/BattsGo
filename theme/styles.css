@@ -1,0 +1,24 @@
+/* Define the stones */
+
+/* Black stone */
+.shudan-stone-image.shudan-sign_1 {
+  background-image: url('./black_stone.png');
+}
+
+/* White stone */
+.shudan-stone-image.shudan-sign_-1 {
+  background-image: url('./white_stone.png');
+}
+
+
+/* Board */
+.shudan-goban {
+    --shudan-board-border-width: 0;
+    --shudan-board-foreground-color: #222;
+
+    --shudan-black-background-color: #0E0E0E;
+    --shudan-black-foreground-color: #eee;
+
+    --shudan-white-background-color: #EBEBEB;
+    --shudan-white-foreground-color: #222;
+}
