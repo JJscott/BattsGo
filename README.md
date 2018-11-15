@@ -1,6 +1,14 @@
 # BattsGo Theme for Sabaki
 
-A theme with meme stones and other gems (soon to come) for [Sabaki](http://sabaki.yichuanshen.de/).
+A theme for [Sabaki](http://sabaki.yichuanshen.de/) based on the [BattsGo](https://www.twitch.tv/battsgo/) twitch stream.
+
+![Screenshot](./board_example.png)
+
+The theme features the `battsgBfine` and `battsgWfine` twitch emotes for the Black and White stones. Markers have been redesigned to fit in with the busy visuals of the stones. The twitch emotes `battsgBzstone` and `battsgWzstone` are used to show stones that are marked as dead during scoring/estimation.
+
+![Example of markers](./marker_example.png)
+![Example of dimmed stones](./dimmed_example.png)
+ 
 
 ## Installation
 
@@ -20,7 +28,3 @@ $ asar pack ./theme ./battsgo.asar
 ```
 
 `battsgo.asar` will be created and is ready for distribution. It can be installed in Preferences.
-
-## License
-
-Everything is released under [public domain](http://creativecommons.org/publicdomain/
