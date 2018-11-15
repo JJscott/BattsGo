@@ -1,6 +1,8 @@
 {
     "name": "BattsGo",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "main": "styles.css",
-    "author": "MoonlightSolace"
+    "description": "A dream theme reamed to the seam with memes. Based on BattsGo twitch emotes and designed with fun (not practicality) in mind.",
+    "author": "JJScott",
+    "homepage": "https://github.com/JJscott/BattsGo"
 }

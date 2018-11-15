@@ -1,4 +1,43 @@
 
+/* Board Variables
+  - shudan-board-background-color must be similar to the board color
+    it is used to erase spaces on the board for the marks.
+  - shudan-board-foreground-color is normally used for the marks, as well as the
+    board lines, hoshi and coordinates, but we use shudan-marker-foreground-color
+    and shudan-marker-background-color instead.
+*/
+.shudan-goban {
+  --shudan-board-border-width: 0;
+  --shudan-board-foreground-color: #daa520;
+  --shudan-marker-background-color: #111;
+  --shudan-marker-foreground-color: #daa520;
+  --shudan-stone-shadow-color: #280000;
+}
+
+
+
+
+
+/* Board */
+
+/* Texture */
+.shudan-goban-image {
+    background-image: url('./board.jpg');
+}
+
+
+/* Grid Lines & Hoshi*/
+.shudan-vertex .shudan-board::before {
+  height: 1px;
+}
+.shudan-vertex .shudan-board::after {
+  width: 1px;
+}
+
+
+
+
+
 /* Stones */
 
 /* Black stone */
@@ -22,19 +61,26 @@
 /* Random rotations for each stone */
 .shudan-stone-image.shudan-sign_1.shudan-random_1,
 .shudan-stone-image.shudan-sign_-1.shudan-random_1 {
-  transform: rotate(4deg);
+  transform: rotate(5deg);
 }
 .shudan-stone-image.shudan-sign_1.shudan-random_2,
 .shudan-stone-image.shudan-sign_-1.shudan-random_2 {
-  transform: rotate(-4deg);
+  transform: rotate(-5deg);
 }
 .shudan-stone-image.shudan-sign_1.shudan-random_3,
 .shudan-stone-image.shudan-sign_-1.shudan-random_3 {
-  transform: rotate(8deg);
+  transform: rotate(10deg);
 }
 .shudan-stone-image.shudan-sign_1.shudan-random_4,
 .shudan-stone-image.shudan-sign_-1.shudan-random_4 {
-  transform: rotate(-8deg);
+  transform: rotate(-10deg);
+}
+
+
+/* Shadow */
+.shudan-vertex:not(.shudan-sign_0) .shudan-shadow {
+  background: var(--shudan-stone-shadow-color);
+  box-shadow: .1em .1em .3em var(--shudan-stone-shadow-color);
 }
 
 
@@ -56,19 +102,19 @@
 }
 
 
-
 /* Point */
 .shudan-vertex.shudan-marker_point .shudan-marker,
 .shudan-vertex.shudan-marker_point.shudan-sign_1 .shudan-marker,
 .shudan-vertex.shudan-marker_point.shudan-sign_-1 .shudan-marker {
-  background: var(--shudan-black-foreground-color);
+  background: var(--shudan-marker-foreground-color);
   box-shadow: 0 0 0 0.04em var(--shudan-marker-background-color);
 }
 
 
-
 /* Cross*/
-/* TODO, get rid of the board clearing*/
+.shudan-vertex.shudan-marker_cross .shudan-marker {
+  background: transparent;
+}
 .shudan-vertex.shudan-marker_cross .shudan-marker::before,
 .shudan-vertex.shudan-marker_cross .shudan-marker::after {
   box-shadow: 0 0 0 0.04em var(--shudan-marker-background-color);
@@ -87,36 +133,54 @@
 /* Triangle
   This one sucks the most!
   https://css-tricks.com/snippets/css/css-triangle/
-  https://stackoverflow.com/a/27985211
-  TODO fix the triangle on the stones
 */
-.shudan-vertex.shudan-marker_triangle .shudan-marker::before {
-    border-bottom-color: var(--shudan-marker-background-color);
+.shudan-vertex.shudan-marker_triangle .shudan-marker::before,
+.shudan-vertex.shudan-marker_triangle.shudan-sign_1 .shudan-marker::before,
+.shudan-vertex.shudan-marker_triangle.shudan-sign_-1 .shudan-marker::before{
+  /* Border of the triangle */
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: var(--shudan-marker-background-color);
 }
-.shudan-vertex.shudan-marker_triangle .shudan-marker::after{
-    border-bottom-color: var(--shudan-marker-foreground-color);
-}
-.shudan-vertex.shudan-marker_triangle.shudan-sign_1 .shudan-marker::after
+.shudan-vertex.shudan-marker_triangle .shudan-marker::after,
+.shudan-vertex.shudan-marker_triangle.shudan-sign_1 .shudan-marker::after,
 .shudan-vertex.shudan-marker_triangle.shudan-sign_-1 .shudan-marker::after {
+  /* Inside of the triangle */
+  border-left-color: transparent;
+  border-right-color: transparent;
   border-bottom-color: var(--shudan-marker-foreground-color);
 }
-
 
 
 /* Label */
 .shudan-vertex.shudan-marker_label .shudan-marker::before,
 .shudan-vertex.shudan-marker_label .shudan-marker::after {
-  padding: 0.1em; /* slightly larger marker box to compensate for label shadow */
+  padding: 0.1em; /* slightly larger marker box to compensate for label border */
 }
+/*
+Text can't have borders, but we can simulate it by creating 16 shadows and offsetting them in all directions
+Here's some python to calculate the angles:
+```
+import numpy as np
+offset = 0.7
+def r(t):
+  c, s = np.cos(t), np.sin(t)
+  r = np.array(((c, -s),(s, c)))
+  return r
+
+for i in range(0, 16):
+  rot = r((i/16.0) * np.pi * 2)
+  print(rot.dot(np.array([offset,0])));
+```
+0.070 0.065 0.027 0.049 
+*/
 .shudan-vertex.shudan-marker_label .shudan-marker::before {
   text-shadow:
-    0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color),
-    0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color),
-    0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color),
-    0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color),
-    0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color), 0 0 0.1em var(--shudan-marker-background-color);
+    0.07em  0.0em var(--shudan-marker-background-color), 0.065em   0.027em var(--shudan-marker-background-color), 0.049em   0.049em var(--shudan-marker-background-color), 0.027em   0.065em var(--shudan-marker-background-color),
+    0.0em  0.07em var(--shudan-marker-background-color), -0.027em  0.065em var(--shudan-marker-background-color), -0.049em  0.049em var(--shudan-marker-background-color), -0.065em  0.027em var(--shudan-marker-background-color),
+    -0.07em 0.0em var(--shudan-marker-background-color), -0.065em -0.027em var(--shudan-marker-background-color), -0.049em -0.049em var(--shudan-marker-background-color), -0.027em -0.065em var(--shudan-marker-background-color),
+    0.0em -0.07em var(--shudan-marker-background-color), 0.027em  -0.065em var(--shudan-marker-background-color), 0.049em  -0.049em var(--shudan-marker-background-color), 0.065em  -0.027em var(--shudan-marker-background-color);
 }
-
 
 
 /* Line & Arrow */
@@ -126,22 +190,4 @@
 .shudan-arrow::after {
   background: var(--shudan-marker-foreground-color);
   box-shadow: 0 0 0 0.04em var(--shudan-marker-background-color);
-}
-
-
-
-
-
-/* Board
-  - shudan-board-background-color must be similar to the board color
-    it is used to erase spaces on the board for the marks.
-  - shudan-board-foreground-color is normally used for the marks, as well as the
-    board lines, hoshi and coordinates, but we use shudan-marker-foreground-color
-    and shudan-marker-background-color instead.
-*/
-.shudan-goban {
-    --shudan-board-border-width: 0;
-
-    --shudan-marker-background-color: #111;
-    --shudan-marker-foreground-color: #eee;
 }
