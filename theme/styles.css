@@ -61,19 +61,19 @@
 /* Random rotations for each stone */
 .shudan-stone-image.shudan-sign_1.shudan-random_1,
 .shudan-stone-image.shudan-sign_-1.shudan-random_1 {
-  transform: rotate(5deg);
+  transform: scale(1.0) rotate(5deg);
 }
 .shudan-stone-image.shudan-sign_1.shudan-random_2,
 .shudan-stone-image.shudan-sign_-1.shudan-random_2 {
-  transform: rotate(-5deg);
+  transform: scale(1.0) rotate(-5deg);
 }
 .shudan-stone-image.shudan-sign_1.shudan-random_3,
 .shudan-stone-image.shudan-sign_-1.shudan-random_3 {
-  transform: rotate(10deg);
+  transform: scale(1.0) rotate(10deg);
 }
 .shudan-stone-image.shudan-sign_1.shudan-random_4,
 .shudan-stone-image.shudan-sign_-1.shudan-random_4 {
-  transform: rotate(-10deg);
+  transform: scale(1.0) rotate(-10deg);
 }
 
 
@@ -81,6 +81,18 @@
 .shudan-vertex:not(.shudan-sign_0) .shudan-shadow {
   background: var(--shudan-stone-shadow-color);
   box-shadow: .1em .1em .3em var(--shudan-stone-shadow-color);
+}
+
+
+/* Grow animation */
+@keyframes stone-grow {
+  from { transform: scale(0.2); }
+}
+.shudan-shadow,
+.shudan-stone-image {
+  animation-name: stone-grow;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-out;
 }
 
 

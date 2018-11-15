@@ -4,13 +4,15 @@ A theme for [Sabaki](http://sabaki.yichuanshen.de/) based on the [BattsGo](https
 
 ![Screenshot](./board_example.png)
 
+
 ## Features
 
 ### Stones
 
-The stone graphics are emotes featured on the [BattsGo](https://www.twitch.tv/battsgo/) Twitch stream. The original 28x28 pixel graphics were up-sampled to 180x180 pixels using super-resolution deep convolutional neural networks for single-image anime-style art, also known as [waifu2x](http://waifu2x.udp.jp/). The up-samples were then edited to ensure that they were perfectly circular and had a hard edge. The stones have random slight rotation to break up the visual tiling and make it easier to comprehend. The theme features the `battsgBfine`+`battsgWfine` emotes for normal stones and the `battsgBzstone`+`battsgWzstone` for stones that are marked as dead (dimmed) during scoring and estimation.
+The stone graphics are emotes featured on the [BattsGo](https://www.twitch.tv/battsgo/) Twitch stream. The original 28x28 pixel graphics were up-sampled to 180x180 pixels using super-resolution deep convolutional neural networks for single-image anime-style art, also known as [waifu2x](http://waifu2x.udp.jp/). The up-samples were then edited to ensure that they were perfectly circular and had a hard edge. When added to the board, the stones will grow into place and will have random slight rotation to break up the visual tiling. The theme features the `battsgBfine` and `battsgWfine` emotes for normal stones and the `battsgBzstone` and `battsgWzstone` for stones that are marked as dead (dimmed) during scoring and estimation.
 
 ![Example of dimmed stones](./dimmed_example.png)
+
 
 ### Marks
 
@@ -30,7 +32,7 @@ The color scheme was created to present a more striking visual than then typical
 
 ### Packing
 
-Make sure you have [node.js and npm](https://nodejs.org/)  installed. If you don't have `asar` installed already, run:
+Make sure you have [node.js and npm](https://nodejs.org/)  installed. If you don't have `asar` installed already, run the following command:
 
 ```
 $ npm install asar -g
@@ -42,4 +44,4 @@ To pack your userstyle into a theme, run the following command:
 $ asar pack ./theme ./battsgo.asar
 ```
 
-`battsgo.asar` will be created and is ready for distribution. It can be installed in Preferences.
+`battsgo.asar` will be created and is ready for distribution.
